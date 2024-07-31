@@ -25,4 +25,12 @@ contract DogToken is ERC20{
     function burn(uint256 amount) public {
         _burn(msg.sender, amount);
     }
+
+       function customTransferr(address recipient, uint256 amount) public returns (bool) {
+        require(amount > 0, "Amount must be greater than zero");
+        require(balanceOf(_msgSender()) >= amount, "Insufficient balance");
+
+        _transfer(_msgSender(), recipient, amount);
+        return true;
+    }
 }
